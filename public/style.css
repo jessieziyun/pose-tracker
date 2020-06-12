@@ -1,0 +1,29 @@
+html {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #000;
+}
+
+#scene-container {
+    position: fixed;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+}
+
+#landing-page {
+    position: fixed;
+    z-index: 99;
+    width: 90%;
+    height: 90%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.9);
+}
