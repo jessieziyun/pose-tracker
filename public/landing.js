@@ -10,12 +10,20 @@ export function createTextElements(div) {
     header.style.paddingTop = "15%";
 
     const para = document.createElement("p");
-    const paraNode = document.createTextNode(
-        "Pose Tracker is a networked pose tracker built using PoseNet and Three.js"
-    );
-    para.appendChild(paraNode);
+    const paraNode1 = document.createTextNode("Pose Tracker is a networked pose tracker built using PoseNet and Three.js. PoseNet");
+    para.appendChild(paraNode1);
+    const br1 = document.createElement("br");
+    para.appendChild(br1);
+    const paraNode2 = document.createTextNode("is trained on full body images, so stand slighly back from the camera for best results.");
+    para.appendChild(paraNode2);
+    const br2 = document.createElement("br");
+    para.appendChild(br2);
+    const paraNode3 = document.createTextNode("The more of your body the camera sees, the more accurate PoseNet's predictions.")
+    para.appendChild(paraNode3);
     para.style.color = "white";
-    para.style.font = "14px Helvetica";
+    para.style.font = "18px Helvetica";
+    para.style.lineHeight = "1.4";
+    para.style.paddingBottom = "2%";
 
     div.appendChild(header);
     div.appendChild(para);
@@ -25,7 +33,6 @@ export function createButton(div) {
     const button = document.createElement("button");
 
     button.style.position = "absolute";
-    button.style.bottom = "15%";
     button.style.width = "210px";
     button.style.left = "calc(50% - 105px)";
     button.style.border = "1px solid #fff";
