@@ -4,7 +4,7 @@ import { createTrackers } from "./tracker.js";
 import * as LandingPage from "./landing.js";
 
 let container, scene, camera, renderer;
-let video, net;
+let video;
 let networkTrackers = [];
 let width = window.innerWidth;
 let height = window.innerHeight;
@@ -23,9 +23,14 @@ async function init() {
 
   LandingPage.createTextElements(div);
   const button = LandingPage.createButton(div);
-  detect(video, net).then(() => {
-    LandingPage.updateButton(button, div);
+
+  const net = await posenet.load({
+    architecture: "MobileNetV1",
+    outputStride: 16,
+    multiplier: 0.75
   });
+
+  LandingPage.updateButton(button, div);
 
   camera = SceneSetup.createCamera(width, height); // create camera
   SceneSetup.createAmbientLight(scene); // create ambient light
@@ -63,12 +68,6 @@ async function init() {
 }
 
 async function detect(video, net) {
-  net = await posenet.load({
-    architecture: "MobileNetV1",
-    outputStride: 16,
-    inputResolution: { width: 640, height: 480 },
-    multiplier: 0.75
-  });
   const pose = await net.estimateSinglePose(video, {
     flipHorizontal: true // make sure video is flipped the right way
   });
@@ -81,7 +80,7 @@ function draw(pose, trackers, depth) {
     poses.push(pose);
 
     const minPoseConfidence = 0.1;
-    const minPartConfidence = 0.6;
+    const minPartConfidence = 0.3;
 
     poses.forEach(({ score, keypoints }) => {
       if (score >= minPoseConfidence) {

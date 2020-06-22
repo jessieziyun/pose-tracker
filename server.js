@@ -19,7 +19,6 @@ io.on("connection", socket => {
     console.log(`New connection: ${socket.id}`);
 
     socket.on("pose", data => {
-      console.log(data);
       socket.broadcast.emit("networkPose", data);
     });
 });
